@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "ESNext",
-    "strict": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "moduleResolution": "node",
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,                      
+    // "outDir": "./dist",
+    "moduleResolution": "bundler",
     "esModuleInterop": true
   },
   "include": ["src"]

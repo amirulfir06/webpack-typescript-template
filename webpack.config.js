@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
@@ -8,6 +9,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
 
     resolve: {
@@ -29,15 +31,31 @@ module.exports = {
     },
 
     devServer: {
-        static: './dist',
+        static: {
+            directory: path.resolve(__dirname, 'dist'),
+            watch: true,
+        },
         port: 3000,
         open: true,
+        hot: true,
+        liveReload: true,
+
+        // Watch source files
+        watchFiles: ['src/**/*'],
     },
 
     plugins: [
-        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html',
+        }),
+
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'src/css',
+                    to: 'css',
+                },
+            ],
         }),
     ],
 
